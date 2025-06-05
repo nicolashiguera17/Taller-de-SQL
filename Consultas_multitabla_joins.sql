@@ -18,3 +18,10 @@ INNER JOIN detalles_pedidos ON pedidos.pedido_id = detalles_pedidos.pedido_id
 INNER JOIN productos ON detalles_pedidos.producto_id = productos.producto_id
 GROUP BY pedidos.pedido_id;
 
+--3.Encuentra los nombres de los clientes y los nombres de los empleados que gestionaron sus pedidos--
+
+SELECT clientes.nombre cliente, empleados.nombre empleado, pedidos.fecha_pedido
+FROM pedidos
+JOIN usuarios clientes ON pedidos.cliente_id = clientes.usuario_id
+JOIN usuarios empleados ON pedidos.empleado_id = empleados.usuario_id;
+

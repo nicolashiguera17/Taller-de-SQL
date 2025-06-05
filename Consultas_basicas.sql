@@ -27,3 +27,7 @@ ORDER BY nombre ASC;
 SELECT cliente_id, pedido_id,fecha_pedido,estado from pedidos
 WHERE estado = 'Pendiente';
 
+--7.Encuentra el nombre y el precio del producto más caro en la base de datos.--
+SELECT nombre , precio 
+FROM productos
+WHERE precio = (SELECT MAX(precio) FROM productos)

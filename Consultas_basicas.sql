@@ -30,4 +30,7 @@ WHERE estado = 'Pendiente';
 --7.Encuentra el nombre y el precio del producto más caro en la base de datos.--
 SELECT nombre , precio 
 FROM productos
-WHERE precio = (SELECT MAX(precio) FROM productos)
+WHERE precio = (SELECT MAX(precio) FROM productos);
+
+--8. Obtén el total de pedidos realizados por cada cliente, mostrando el ID del cliente y el total de pedidos.--
+SELECT cliente_id, COUNT(*) FROM pedidos GROUP BY cliente_id;

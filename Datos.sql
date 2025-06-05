@@ -1,4 +1,4 @@
--- Active: 1749134984621@@127.0.0.1@3307@taller
+-- Active: 1749152392173@@127.0.0.1@3307@taller
 ALTER TABLE nombre_tabla AUTO_INCREMENT = 1;
 INSERT INTO tipos_usuarios(nombre) VALUES ('Cliente'), ('Empleado');
 INSERT INTO usuarios (

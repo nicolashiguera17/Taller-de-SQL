@@ -1,3 +1,4 @@
+-- Active: 1749134984621@@127.0.0.1@3307@taller
 -- 1. Consulta todos los datos de la tabla `usuarios` para ver la lista completa de clientes. --
 SELECT * FROM usuarios;
 

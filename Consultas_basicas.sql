@@ -21,3 +21,9 @@ WHERE empleados.salario > 2500000;
 SELECT nombre,categoria from productos
 where categoria = 'Electrónica' 
 ORDER BY nombre ASC;
+
+--6.Muestra los detalles de los pedidos que están en estado "Pendiente", incluyendo el ID del pedido, el ID del cliente y la fecha del pedido.--
+
+SELECT cliente_id, pedido_id,fecha_pedido,estado from pedidos
+WHERE estado = 'Pendiente';
+

@@ -49,3 +49,17 @@ FROM detalles_pedidos
 RIGHT JOIN productos
 ON detalles_pedidos.producto_id = productos.producto_id;
 
+--6 Lista todos los empleados junto con los pedidos que han gestionado, si existen, usando `LEFT JOIN` para ver los empleados sin pedidos.--
+
+
+SELECT
+    empleados.empleado_id,
+    empleados.puesto ,
+    empleados.fecha_contratacion ,
+    empleados.salario ,
+    pedidos.fecha_pedido ,
+    pedidos.estado 
+FROM empleados
+LEFT JOIN pedidos
+ON empleados.empleado_id = pedidos.empleado_id;
+

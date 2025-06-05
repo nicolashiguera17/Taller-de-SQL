@@ -63,3 +63,17 @@ FROM empleados
 LEFT JOIN pedidos
 ON empleados.empleado_id = pedidos.empleado_id;
 
+
+--7 Encuentra los empleados que no han gestionado ningún pedido usando un `LEFT JOIN` combinado con `WHERE`. --
+
+SELECT
+    empleados.empleado_id,
+    empleados.puesto Puesto,
+    empleados.fecha_contratacion FechaContratacion,
+    empleados.salario Salario,
+    pedidos.fecha_pedido FechaPedido,
+    pedidos.estado Estado
+FROM empleados
+LEFT JOIN pedidos
+ON empleados.empleado_id = pedidos.empleado_id
+WHERE pedidos.empleado_id IS NULL;

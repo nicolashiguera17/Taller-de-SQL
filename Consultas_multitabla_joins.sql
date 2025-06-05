@@ -25,3 +25,15 @@ FROM pedidos
 JOIN usuarios clientes ON pedidos.cliente_id = clientes.usuario_id
 JOIN usuarios empleados ON pedidos.empleado_id = empleados.usuario_id;
 
+-- 4. Muestra todos los pedidos y, si existen, los productos en cada pedido, incluyendo los pedidos sin productos usando LEFT JOIN --
+
+SELECT 
+    productos.nombre AS Producto,
+    pedidos.cliente_id AS Cliente,
+    pedidos.empleado_id AS Empleado,
+    detalles_pedidos.cantidad AS Cantidad,
+    pedidos.fecha_pedido AS Fecha,
+    pedidos.estado AS Estado
+FROM pedidos
+LEFT JOIN detalles_pedidos ON pedidos.pedido_id = detalles_pedidos.pedido_id
+LEFT JOIN productos ON detalles_pedidos.producto_id = productos.producto_id;

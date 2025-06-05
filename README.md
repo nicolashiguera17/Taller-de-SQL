@@ -1,62 +1,58 @@
+# 🧠 Taller de SQL: Consultas Básicas y Subconsultas en MySQL
 
-🧠 Taller de SQL: Consultas Básicas y Subconsultas en MySQL
-¡Bienvenid@ al Taller de SQL! En esta sesión aprenderás a trabajar con bases de datos relacionales mediante consultas básicas y subconsultas usando MySQL.
+¡Bienvenid@ al **Taller de SQL**! En esta sesión aprenderás a trabajar con bases de datos relacionales mediante **consultas básicas** y **subconsultas** usando MySQL.
 
-🎯 Objetivos del Taller
+---
+
+## 🎯 Objetivos del Taller
+
 Durante este taller, serás capaz de:
 
-Realizar consultas SQL básicas para extraer, filtrar y ordenar datos.
+1. Realizar **consultas SQL básicas** para extraer, filtrar y ordenar datos.
+2. Comprender y aplicar **subconsultas** para resolver problemas complejos.
+3. Utilizar subconsultas dentro de cláusulas como `WHERE` y `FROM` para realizar análisis más avanzados.
+4. Construir **consultas reales y útiles** sobre una base de datos relacional.
 
-Comprender y aplicar subconsultas para resolver problemas complejos.
+---
 
-Utilizar subconsultas dentro de cláusulas como WHERE y FROM para realizar análisis más avanzados.
+## 📚 ¿Qué Vamos a Aprender?
 
-Construir consultas reales y útiles sobre una base de datos relacional.
-
-📚 ¿Qué Vamos a Aprender?
 Este taller está dividido en secciones prácticas:
 
-Consultas Básicas
+1. **Consultas Básicas**
+   - Uso de `SELECT`, `WHERE`, `ORDER BY`, `GROUP BY`.
 
-Uso de SELECT, WHERE, ORDER BY, GROUP BY.
+2. **Subconsultas en `WHERE`**
+   - Para filtrar registros con condiciones dependientes de otras consultas.
 
-Subconsultas en WHERE
+3. **Subconsultas en `FROM`**
+   - Para crear tablas derivadas y realizar operaciones más complejas.
 
-Para filtrar registros con condiciones dependientes de otras consultas.
+4. **Ejercicios Prácticos**
+   - Resolverás situaciones reales de negocio usando SQL.
 
-Subconsultas en FROM
+---
 
-Para crear tablas derivadas y realizar operaciones más complejas.
+## 🧩 Estructura de la Base de Datos
 
-Ejercicios Prácticos
-
-Resolverás situaciones reales de negocio usando SQL.
-
-🧩 Estructura de la Base de Datos
 La base de datos del taller incluye las siguientes tablas:
 
-tipos_usuarios: Define si un usuario es cliente o empleado.
+- **tipos_usuarios**: Define si un usuario es cliente o empleado.
+- **usuarios**: Contiene información común de personas (clientes o empleados).
+- **empleados**: Información laboral de los empleados.
+- **proveedores**: Empresas proveedoras.
+- **productos**: Catálogo de productos.
+- **proveedores_productos**: Relación entre productos y proveedores.
+- **pedidos**: Encabezado de cada pedido realizado por un cliente.
+- **detalles_pedidos**: Detalle de productos en cada pedido.
 
-usuarios: Contiene información común de personas (clientes o empleados).
+---
 
-empleados: Información laboral de los empleados.
+## 🏗️ Scripts de Creación de Tablas
 
-proveedores: Empresas proveedoras.
+Ejemplo de estructura:
 
-productos: Catálogo de productos.
-
-proveedores_productos: Relación entre productos y proveedores.
-
-pedidos: Encabezado de cada pedido realizado por un cliente.
-
-detalles_pedidos: Detalle de productos en cada pedido.
-
-🏗️ Scripts de Creación de Tablas
-El esquema de base de datos está definido con claves foráneas, índices y restricciones. Aquí tienes algunos ejemplos clave:
-
-sql
-Copiar
-Editar
+```sql
 -- Tabla de tipos de usuario
 CREATE TABLE tipos_usuarios (
     tipo_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,44 +73,3 @@ CREATE TABLE usuarios (
     FOREIGN KEY (tipo_id) REFERENCES tipos_usuarios(tipo_id)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
-(El resto del script está bien estructurado, por lo que no hace falta repetirlo completo aquí.)
-
-💾 Carga de Datos
-Aquí tienes datos precargados para el taller:
-
-Tipos de Usuarios
-sql
-Copiar
-Editar
-INSERT INTO tipos_usuarios(nombre)
-VALUES ('Cliente'), ('Empleado');
-Clientes
-Clientes de distintos lugares de España y Colombia:
-
-sql
-Copiar
-Editar
-INSERT INTO usuarios (tipo_id, nombre, email, telefono, direccion, ciudad, pais, fecha_registro)
-VALUES
-(1, 'Ana Pérez', 'ana.perez@gmail.com', '555-1234', 'Calle 123', 'Madrid', 'España', '2022-01-15'),
-(1, 'Juan Quiroga', 'juan.quiroga@gmail.com', '+57 3001234567', 'Cra 10 #45-20', 'Bogotá', 'Colombia', '2025-06-01');
-(...otros registros de clientes...)
-
-Empleados y Datos Laborales
-sql
-Copiar
-Editar
-INSERT INTO usuarios (tipo_id, nombre, email, fecha_registro)
-VALUES
-(2, 'Carlos López', 'carlos.lopez@empresa.com', '2020-05-10');
-Luego se relacionan con la tabla empleados:
-
-sql
-Copiar
-Editar
-INSERT INTO empleados (usuario_id, puesto, fecha_contratacion, salario)
-VALUES (
-  (SELECT usuario_id FROM usuarios WHERE email = 'carlos.lopez@empresa.com'),
-  'Gerente de Ventas', '2020-05-10', 3500000.00
-);
-(...continúa con otros registros...)

@@ -1,4 +1,4 @@
--- Active: 1749123691818@@127.0.0.1@3309@taller
+-- Active: 1749134984621@@127.0.0.1@3307@taller
 -- 1. Tabla de tipos de usuarios
 CREATE TABLE tipos_usuarios (
     tipo_id   INT AUTO_INCREMENT PRIMARY KEY,

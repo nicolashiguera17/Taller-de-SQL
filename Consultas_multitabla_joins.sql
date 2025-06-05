@@ -5,8 +5,7 @@ SELECT usuarios.nombre,
     detalles_pedidos.cantidad, 
     detalles_pedidos.precio_unitario
 FROM usuarios
-JOIN pedidos 
-ON pedidos.cliente_id = usuarios.usuario_id
+JOIN pedidos ON pedidos.cliente_id = usuarios.usuario_id
 JOIN detalles_pedidos 
 
 --2. Lista todos los productos pedidos junto con el precio unitario de cada pedido --
@@ -46,8 +45,7 @@ SELECT
     detalles_pedidos.cantidad AS Cantidad,
     detalles_pedidos.detalle_id AS Detalle_Pedido
 FROM detalles_pedidos
-RIGHT JOIN productos
-ON detalles_pedidos.producto_id = productos.producto_id;
+RIGHT JOIN productos ON detalles_pedidos.producto_id = productos.producto_id;
 
 --6 Lista todos los empleados junto con los pedidos que han gestionado, si existen, usando `LEFT JOIN` para ver los empleados sin pedidos.--
 
@@ -60,8 +58,7 @@ SELECT
     pedidos.fecha_pedido ,
     pedidos.estado 
 FROM empleados
-LEFT JOIN pedidos
-ON empleados.empleado_id = pedidos.empleado_id;
+LEFT JOIN pedidos ON empleados.empleado_id = pedidos.empleado_id;
 
 
 --7 Encuentra los empleados que no han gestionado ningún pedido usando un `LEFT JOIN` combinado con `WHERE`. --
@@ -74,8 +71,7 @@ SELECT
     pedidos.fecha_pedido FechaPedido,
     pedidos.estado Estado
 FROM empleados
-LEFT JOIN pedidos
-ON empleados.empleado_id = pedidos.empleado_id
+LEFT JOIN pedidos ON empleados.empleado_id = pedidos.empleado_id
 WHERE pedidos.empleado_id IS NULL;
 
  -- 8.alcula el total gastado en cada pedido, mostrando el ID del pedido y el total, usando `JOIN`.
@@ -84,9 +80,7 @@ SELECT
     pedidos.fecha_pedido AS FechaPedido,
     SUM(detalles_pedidos.precio_unitario * detalles_pedidos.cantidad) AS TotalGastado
 FROM pedidos
-JOIN detalles_pedidos
-ON pedidos.pedido_id = detalles_pedidos.pedido_id
-GROUP BY pedidos.pedido_id, pedidos.fecha_pedido;
+JOIN detalles_pedidos ON pedidos.pedido_id = detalles_pedidos.pedido_id GROUP BY pedidos.pedido_id, pedidos.fecha_pedido;
 
 --9.Realiza un `CROSS JOIN` entre clientes y productos para mostrar todas las combinaciones posibles de clientes y productos.--
 
@@ -107,10 +101,8 @@ SELECT
     productos.categoria AS Categoria,
     productos.precio AS Precio
 FROM proveedores
-JOIN proveedores_productos
-    ON proveedores.proveedor_id = proveedores_productos.proveedor_id
-JOIN productos
-    ON proveedores_productos.producto_id = productos.producto_id
+JOIN proveedores_productos ON proveedores.proveedor_id = proveedores_productos.proveedor_id
+JOIN productos ON proveedores_productos.producto_id = productos.producto_id
 WHERE productos.nombre = 'Teclado';
 
 
@@ -122,10 +114,8 @@ SELECT
     productos.categoria AS Categoria,
     productos.precio AS Precio
 FROM proveedores
-JOIN proveedores_productos
-    ON proveedores.proveedor_id = proveedores_productos.proveedor_id
-JOIN productos
-    ON proveedores_productos.producto_id = productos.producto_id
+JOIN proveedores_productos ON proveedores.proveedor_id = proveedores_productos.proveedor_id
+JOIN productos ON proveedores_productos.producto_id = productos.producto_id
 WHERE proveedores.nombre = 'Electrodomésticos del Norte'; 
 
 -- 13 Lista los proveedores que no están asociados a ningún producto (es decir, que aún no suministran).--
@@ -159,4 +149,23 @@ SELECT
 FROM proveedores
 JOIN proveedores_productos ON proveedores.proveedor_id = proveedores_productos.proveedor_id
 WHERE proveedores_productos.producto_id = 1;
+
+--17 Cuenta cuántos proveedores tiene cada producto, listando `producto_id`, `nombre` y `cantidad_proveedores`. --
+
+SELECT 
+    productos.producto_id,
+    productos.nombre AS Producto,
+    COUNT(proveedores_productos.proveedor_id) AS cantidad_proveedores
+FROM productos
+JOIN proveedores_productos ON productos.producto_id = proveedores_productos.producto_id GROUP BY productos.producto_id, productos.nombre;
+
+-- 18 Cuenta cuántos productos suministra cada proveedor, mostrando `proveedor_id`, `nombre_proveedor` y `total_productos`.
+SELECT 
+    proveedores.proveedor_id,
+    proveedores.nombre AS nombre_proveedor,
+    COUNT(proveedores_productos.producto_id) AS total_productos
+FROM proveedores
+JOIN proveedores_productos ON proveedores.proveedor_id = proveedores_productos.proveedor_id GROUP BY proveedores.proveedor_id, proveedores.nombre;
+
+
 
